@@ -12,7 +12,7 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(),
+            'title' => $this->faker->unique->sentence(),
             'description' => $this->faker->realTextBetween(100, 150),
             'text' => $this->faker->realTextBetween(250, 500),
             'is_published' => $this->faker->boolean(70),
