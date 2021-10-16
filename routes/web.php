@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 Route::get('/news', [NewsController::class, 'getList'])->name('news_list');
-Route::get('/{slug}', [NewsController::class, 'getDetails'])->name('news_item');
+Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_item');
