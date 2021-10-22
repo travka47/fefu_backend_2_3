@@ -56,7 +56,7 @@
             </div>
             <div>
                 <label>Email</label>
-                <textarea name="email" class="bordered">{{request()->isMethod('post') ? old('email') : ""}}</textarea>
+                <input name="email" class="bordered" type="email" value="{{request()->isMethod('post') ? old('email') : ""}}" size="25"/>
                 @if(isset($errors['emailSize']))
                     <p class="error">{{ $errors['emailSize'] }}</p>
                 @endif
