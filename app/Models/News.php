@@ -40,8 +40,8 @@ class News extends Model
             $newSlug = $this->slug;
 
             $redirect = new Redirect();
-            $redirect->old_slug = parse_url(route('news_item', ['slug' => $oldSlug], false))['path'];
-            $redirect->new_slug = parse_url(route('news_item', ['slug' => $newSlug], false))['path'];
+            $redirect->old_slug = route('news_item', ['slug' => $oldSlug], false)['path'];
+            $redirect->new_slug = route('news_item', ['slug' => $newSlug], false)['path'];
             $redirect->save();
         }
         return parent::save($options);

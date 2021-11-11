@@ -35,7 +35,7 @@ class RedirectFromOldSlug
                 ->orderByRaw('created_at DESC, id DESC')
                 ->first();
         }
-        if ($newSlug)
+        if ($newSlug !== null)
             return redirect($tail);
 
         return $next($request);

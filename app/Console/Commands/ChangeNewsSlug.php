@@ -30,8 +30,8 @@ class ChangeNewsSlug extends Command
         }
 
         $redirect = Redirect::query()
-            -> where('old_slug', parse_url(route('news_item', ['slug' => $oldSlug], false))['path'])
-            -> where('new_slug', parse_url(route('news_item', ['slug' => $newSlug], false))['path'])
+            -> where('old_slug', route('news_item', ['slug' => $oldSlug], false))['path']
+            -> where('new_slug', route('news_item', ['slug' => $newSlug], false))['path']
             ->first();
         if ($redirect !== null)
         {
@@ -47,7 +47,7 @@ class ChangeNewsSlug extends Command
         }
 
         DB::transaction(function() use ($news, $newSlug) {
-            Redirect::where('old_slug', parse_url(route('news_item', ['slug' => $newSlug], false))['path'])->delete();
+            Redirect::where('old_slug', route('news_item', ['slug' => $newSlug], false))['path']->delete();
             $news->slug = $newSlug;
             $news->save();
         });
