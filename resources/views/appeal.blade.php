@@ -28,6 +28,16 @@
             .success {
                 color: green;
             }
+
+            .message {
+                font-style: italic;
+                margin-bottom: 0;
+            }
+
+            .link {
+                color: blue;
+                margin: 1rem 0;
+            }
         </style>
     </head>
     <body>
@@ -84,5 +94,9 @@
             </div>
             <input type="submit"/>
         </form>
+        @if ($suggestion_shown)
+            <p class="message">Thank you for the feedback!</p>
+            <a href="{{ url()->previous() }}" class="link">Return to previous page</a>
+        @endif
     </body>
 </html>

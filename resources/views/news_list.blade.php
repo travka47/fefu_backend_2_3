@@ -1,3 +1,4 @@
+{{--@extends('layouts.suggestion')--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,8 +18,10 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        @includeWhen(session('suggestion'), 'layouts.suggestion')
     </head>
     <body>
+{{--        <h1>{{ dd(session()->all()) }}</h1>--}}
         <h1>Новости</h1>
         @foreach($news as $i => $news_item)
             <a href="{{ route('news_item', ['slug' => $news_item->slug]) }}"><b>{{ $news_item->title }}</b></a>

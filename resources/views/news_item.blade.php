@@ -1,3 +1,4 @@
+{{--@extends('layouts.suggestion')--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,6 +18,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        @includeWhen(session('suggestion'), 'layouts.suggestion')
     </head>
     <body>
         <a href="{{ route('news_list') }}">Новости</a>
