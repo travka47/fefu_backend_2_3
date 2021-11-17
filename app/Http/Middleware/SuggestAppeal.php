@@ -35,7 +35,7 @@ class SuggestAppeal
             else
             {
                 $request->session()->now('suggestion', true);
-                $request->session()->put('suggestion_shown', false);
+                $request->session()->put('suggestion_shown', true);
                 $request->session()->increment('suggestion_counter');
                 $request->session()->put('transaction_counter', 0);
             }
