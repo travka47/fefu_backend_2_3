@@ -17,6 +17,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        @includeWhen(session('suggestion'), 'layouts.suggestion')
     </head>
     <body>
         <a href="{{ route('news_list') }}">Новости</a>
