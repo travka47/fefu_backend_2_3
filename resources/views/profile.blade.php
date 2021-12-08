@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Profile</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -16,23 +16,18 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            .link {
+                color: blue;
+                margin: 1rem 0;
+            }
         </style>
-        @includeWhen(session('suggestion'), 'layouts.suggestion')
         @include('layouts.app')
     </head>
     <body>
-        <h1>Новости</h1>
-        @foreach($news as $i => $news_item)
-            <a href="{{ route('news_item', ['slug' => $news_item->slug]) }}"><b>{{ $news_item->title }}</b></a>
-            <p>{{ $news_item->published_at }}</p>
-            @if($news_item->description !== null)
-                <p>{{ $news_item->description }}</p>
-            @endif
-            @if($i > 0)
-                <hr>
-            @endif
-        @endforeach
-
-        {{ $news->links() }}
+        <h2>Профиль</h2>
+        <p>Login: {{ $user->login }}</p>
+        <p>Name: {{ $user->name ?? '-' }}</p>
+        <p>Email: {{ $user->email ?? '-' }}</p>
+        <a href="{{ route('news_list') }}" class="link">Новости</a>
     </body>
 </html>

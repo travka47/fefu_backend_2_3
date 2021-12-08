@@ -39,6 +39,7 @@
                 margin: 1rem 0;
             }
         </style>
+        @include('layouts.app')
     </head>
     <body>
         <h2>Отправить обращение</h2>
