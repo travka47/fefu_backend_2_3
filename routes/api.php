@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::apiResource('posts', PostController::class)
     ->scoped([
@@ -36,3 +33,10 @@ Route::apiResource('posts', PostController::class)
     ->missing(function () {
         return response()->json(['message' => 'Comment not found'], 404);
  });
+
+Route::post('/registration', [ApiAuthController::class, 'registration']);
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/profile', [ApiAuthController::class, 'profile']);
+    Route::post('/logout', [ApiAuthController::class, 'logout']);
+});
