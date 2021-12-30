@@ -18,7 +18,7 @@ class RegistrationController extends Controller
             if ($request->isMethod('post')) {
                 $request['login'] = strtolower($request['login']);
                 $validated = $request->validate([
-                    'login' => 'unique:users|required|between:5, 30|regex: /^[a-z\.-]+$/i',
+                    'login' => 'unique:users|required|between:5, 30|regex: /^[a-z0-9\-._]+$/i',
                     'password' => 'required|between:10, 30|regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&].{10,}$/'
                 ]);
 
