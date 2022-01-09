@@ -7,11 +7,19 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
     private const PAGE_SIZE = 5;
+
+    public function __construct() {
+        $this->middleware('auth:sanctum', ['only' => ['store', 'update', 'destroy']]);
+        $this->authorizeResource(Post::class, 'post', [
+           'except' => ['index', 'show']
+        ]);
+    }
 
     public function index() : JsonResponse
     {
@@ -33,7 +41,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $validator->validated()['title'];
         $post->text = $validator->validated()['text'];
-        $post->user_id = User::inRandomOrder()->first()->id;
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         return response()->json(new PostResource($post), 201);
@@ -69,6 +77,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $post->comments()->delete();
         $post->delete();
         return response()->json(['message' => 'Post removed successfully']);
     }
