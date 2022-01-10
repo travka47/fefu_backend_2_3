@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiNewsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ Route::apiResource('posts', PostController::class)
         return response()->json(['message' => 'Post not found'], 404);
  });
 
-    Route::apiResource('posts.comments', CommentController::class)
+Route::apiResource('posts.comments', CommentController::class)
     ->scoped([
         'post' => 'slug',
         'comment' => 'id'
@@ -33,6 +34,14 @@ Route::apiResource('posts', PostController::class)
     ->missing(function () {
         return response()->json(['message' => 'Comment not found'], 404);
  });
+
+Route::apiResource('news', ApiNewsController::class)
+    ->scoped([
+        'news' => 'slug'
+    ])
+    ->missing(function () {
+       return response()->json(['message' => 'News not found'], 404);
+});
 
 Route::post('/registration', [ApiAuthController::class, 'registration']);
 Route::post('/login', [ApiAuthController::class, 'login']);
